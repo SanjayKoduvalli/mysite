@@ -1,0 +1,35 @@
+{% extends "base_template.html" %}
+{% block content%}
+<div>
+    <h1>Work Experience</h1><br>
+</div>
+{% for exper in df %}
+<div class="container-fluid">
+    <div class = "row">
+        {{exper['title']}}
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            {{exper['company']}}
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            {{exper['timeline']}}
+        </div>
+    </div>
+    <div class="row">
+        {% for bullet in exper['bullets'] %}
+            <ul>
+                <li>{{bullet}}</li>
+            </ul>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% if exper['display_pics'] %}
+            {% for pic in exper['pics'] %}
+            <img src="{{ url_for('static', filename='images/' + pic) }}", alt="Pic Not Found", height = 100, width= 130>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{%endblock%}
