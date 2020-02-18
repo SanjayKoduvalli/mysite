@@ -24,7 +24,16 @@ body,
   background-size: cover;
 }
 
-/* .projects {
+#projects {
+  background: url("/static/images/marble.jpg")no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+}
+
+ .projects {
     background-color: black;
     color: white;
     margin: 20px;
@@ -34,4 +43,4 @@ body,
 a.projects {
     color: inherit;
     text-decoration:none;
-} */
+} 

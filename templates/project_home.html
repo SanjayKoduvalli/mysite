@@ -1,10 +1,38 @@
 {% extends "base_template.html" %}
 {% block content%}
-<h1>Projects</h1>
-{% for project in projects %}
-<div class="projects">
-    <h2><a href="{{url_for('project_page', project =project['link'])}}" class="projects">{{project['title']}}</a></h2>
-    <p>{{project['synopsis']}}</p>
+<!-- scrollbar -->
+<div class="my-custom-scrollbar my-custom-scrollbar-primary">
+<div id="projects" class="view">
+
+                <!--Section heading-->
+                <h2 class="h1-responsive font-weight-bold text-center text-black my-5">Coding Projects</h2>
+            
+                {% for project in projects %}
+                    <!--Projects section v.4-->
+                    <section>
+                        <!--Grid row-->
+                        <div class="row mx-1">
+                    
+                            <!--Grid column-->
+                            <div class="col-md-12 mb-4">
+                                <div class="card card-image" style="background-image: url({{url_for('static', filename='images/' + project['section_image'])}});">
+                                    <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                                        <div>
+                                            <h3 class="card-title py-3 font-weight-bold"><strong>{{project['title']}}</strong></h3>
+                                            <p class="pb-3">{{project['synopsis']}}</p>
+                                            <a href="{{url_for('project_page', project =project['link'])}}" class="btn btn-outline-strong">View Project</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+                        </div>
+                        <!--Grid row-->
+                    </section>
+                    <!--Projects section v.4-->
+                {% endfor %}
+    </div>
+    <!-- scrollbar -->
+
 </div>
-{% endfor %}
 {%endblock%}

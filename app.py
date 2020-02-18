@@ -13,9 +13,12 @@ navbar_lines = [
 curr_page = "Home"
 
 projects =[
-    {'title': 'Supply Chain Simulation', 'synopsis': 'Using Simpy to recreate a multiechelon supply chain', 'link': 'simpy'},
-    {'title': 'Build a Website', 'synopsis': 'Build a website to show you can!', 'link': 'simpy'},
-    {'title': 'Kaggle Competitions', 'synopsis': 'See my entries and placements in Kaggle competitions!', 'link': 'simpy'}
+    {'title': 'Citibike Demand Forecasting', 'synopsis': 'Predict demand for bikes at different citibike stations.', 
+        'link': 'simpy', 'section_image':'citibike.jpg'},
+    {'title': 'Build a Website', 'synopsis': 'I built this website using jinja 2, flask, and bootstrap.', 
+        'link': 'simpy', 'section_image':'webdesign2.jpg'},
+    {'title': 'Supply Chain Simulation', 'synopsis': 'Using Simpy to recreate a multiechelon supply chain', 
+        'link': 'simpy', 'section_image':'supplychain2.jpg'}
 ]
 
 exper = [
