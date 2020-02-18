@@ -23,23 +23,10 @@
   </head>
 
   <body>
-    <!-- <header>
-      <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-          <div class="container-fluid">
-              <div class="navbar-header">
-              <a class="navbar-brand" href="{{url_for('home')}}">SK</a>
-              </div>
-              <ul class="nav navbar-nav">
-              {% for nav_item in navbar_lines %}
-              <li {% if curr_page == nav_item['id'] %} class="active"{% endif%}><a href="{{url_for(nav_item['link'])}}">{{nav_item['title']}}</a></li>
-              {% endfor %}
-              </ul>
-          </div>
-      </nav>
-    </header> -->
+
 
     <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+<nav class="navbar navbar-expand-lg navbar-dark unique-color-dark fixed-top ">
 
     <div class="container">
   
@@ -55,45 +42,34 @@
           {% for nav_item in navbar_lines %}
           <li {% if curr_page == nav_item['id'] %} class="nav-item active" {% else %} class="nav-item" {% endif%}>
             
-            <a href="{{url_for(nav_item['link'])}}">{{nav_item['title']}}</a></li>
+            <a class="nav-link" href="{{url_for(nav_item['link'])}}">{{nav_item['title']}}</a></li>
           {% endfor %}
-
-          <!-- <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li> -->
-  
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
   
         </ul>
-        <!-- Links -->
-  
-        <form class="form-inline">
-          <div class="md-form my-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          </div>
-        </form>
       </div>
-      <!-- Collapsible content -->
-  
-    </div>
-  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.linkedin.com/feed/">
+              <i class="fab fa-linkedin-in"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="mailto:ksanjay@umich.edu">
+              <i class="fas fa-envelope"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.facebook.com/sanjay.koduvalli">
+              <i class="fab fa-facebook-f"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.linkedin.com/in/sanjay-koduvalli-166523a4">
+              <i class="fab fa-instagram"></i> </a>
+          </li>
+
+        </ul>
+      </div>
+
+
   </nav>
   <!--/.Navbar-->
 

@@ -1,26 +1,75 @@
 {% extends "base_template.html" %}
 {% block content%}
   
+
+<!--Mask-->
 <div id="intro" class="view">
 
-    <div class="mask rgba-black-strong">
+  <div class="mask rgba-black-strong">
+    <div class="mask rgba-black-light">
 
-      <!-- Heading -->
-      <h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Travel</h2>
-  
-      <!-- Divider -->
-      <hr class="hr-light">
-  
-      <!-- Description -->
-      <h4 class="white-text my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti consequuntur.</h4>
-      <button type="button" class="btn btn-outline-white">Read more<i class="fas fa-book ml-2"></i></button>
-  
+      <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+
+          <div class="col d-flex justify-content-center text-left">
+
+              <div class="col-md-10">
+
+                  <!-- Heading -->
+                  <h2 class="display-4 font-weight-bold white-text pt-3 mb-2">Hi. I'm Sanjay, and I like making cool stuff with code.</h2>
+
+                  <!-- Divider -->
+                  <hr class="hr-light">
+
+                  <!-- Description -->
+                  <h4 class="white-text my-4">I've got experience in data analysis, machine learning, entreprenuership, and marketing.</h4>
+
+
+                  <div class="d-flex flex-row">
+                        <!--Grid column-->
+                        <div class="col-md-4 mb-1">
+                          <i class="fas fa-camera-retro"></i>
+                          <h4 class="white-text my-4">Coding</h4>
+                          <p class="white-text">After minoring in computer science, I've done work in C++, Python, R, and SQL.</p>
+                          <a href="{{url_for('project_home')}}" class="btn btn-outline-light">Read more </a>
+                        </div>
+                      <!--Grid column-->
+
+                      <!--Grid column-->
+                      <div class="col-md-4 mb-1">
+                          <i class="fas fa-heart"></i>
+                          <h4 class="white-text my-4">Entreprenuership</h4>
+                          <p class="white-text">During my time in college, I entered an incubator for businesses solving problems in education, and won $5,000.</p>
+                          <a href="#" class="btn btn-outline-light">Read more </a>
+                      </div>
+                      <!--Grid column-->
+
+                      <!--Grid column-->
+                      <div class="col-md-4 mb-1">
+                          <i class="fas fa-bicycle"></i>
+                          <h4 class="white-text my-4">Analytical Consulting</h4>
+                          <p class="white-text">While working at Macy's, I've been part of a small team that radically changed the way Macy's supply chain works to optimize sales.</p>
+                          <a href="{{url_for('experiences')}}" class="btn btn-outline-light">Read more </a>
+                      </div>
+                      <!--Grid column-->
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
+      <!-- Put three tiles here. One for each kind of project -->
+
+
   </div>
-  
-  </div>
+
+</div>
+</div>
+<!--/.Mask-->
 
 <main>
 
+  
 
 </main>
 
