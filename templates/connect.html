@@ -1,6 +1,6 @@
 {% extends "base_template.html" %}
 {% block content%}
-<div>
+<!-- <div>
     <h1>Connect with Me</h1>
     <span style="font-size: 8rem;">
             <a  href="https://www.linkedin.com/in/sanjay-koduvalli-166523a4/"><i class="fab fa-linkedin"></i></a>
@@ -8,5 +8,59 @@
     <span style="font-size: 8rem;">
             <a  href="mailto:ksanjay@umich.edu"><i class="far fa-envelope"></i></a>
     </span>
-</div>
+</div> -->
+
+
+
+<!--Mask-->
+<div id="contact" class="view">
+
+        <div class="mask rgba-black-strong">
+          <div class="mask rgba-black-light">
+      
+            <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+      
+                <div class="col d-flex justify-content-center text-left">
+      
+                    <div class="col-md-10">
+      
+                        <!-- Heading -->
+                        <h2 class="display-4 font-weight-bold white-text pt-3 mb-2">Contact Me</h2>
+      
+                        <!-- Divider -->
+                        <hr class="hr-light">
+      
+                        <div class="d-flex flex-row">
+                              <!--Grid column-->
+                              <div class="col-md-4 mb-1">
+                                <a href="mailto:ksanjay@umich.edu" class="btn btn-outline-light btn-lg">Email </a>
+                              </div>
+                            <!--Grid column-->
+      
+                            <!--Grid column-->
+                            <div class="col-md-4 mb-1">
+                               <a href="https://www.linkedin.com/in/sanjay-koduvalli-166523a4/" class="btn btn-outline-light btn-lg">Linkedin </a>
+                            </div>
+                            <!--Grid column-->
+      
+                            <!--Grid column-->
+                            <div class="col-md-4 mb-1">
+                                <a href="{{ url_for('static', filename='attachments/Sanjay_Koduvalli_Resume_01_2020.pdf') }}" class="btn btn-outline-light btn-lg">Resume </a>
+                            </div>
+                            <!--Grid column-->
+                        </div>
+                    </div>
+      
+                </div>
+      
+            </div>
+      
+            <!-- Put three tiles here. One for each kind of project -->
+      
+      
+        </div>
+      
+      </div>
+      </div>
+      <!--/.Mask-->
 {%endblock%}

@@ -12,6 +12,18 @@ body,
     background-size: cover;
 }
 
+#contact {
+  height: 100%;
+}
+
+#contact {
+  background: url("/static/images/desk_photo.jpg")no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 /* .projects {
     background-color: black;
     color: white;
