@@ -44,3 +44,9 @@ a.projects {
     color: inherit;
     text-decoration:none;
 } 
+
+
+.haf_intro_image {
+  max-width: 30%;
+  height: auto;
+}
