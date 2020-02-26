@@ -3,7 +3,6 @@
 <!--Main layout-->
 <main class="mt-5">
         <div class="container">
-
         <!-- Heading -->
         <h2 class="font-weight-bold">Overview</h2>
       
@@ -14,22 +13,57 @@
             <div class="d-flex flex-row">
       
                 <!-- Description -->
-                <p class="grey-text mr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                    facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                    sit pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                    facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                    sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                    facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                    sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                    facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                    sit pariatur</p>
-                <!-- Image Showing Hold and Flow -->
-                <img src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg" class="img-fluid haf_intro_image">
-            
-      
+                <p class="grey-text mr-2">At Macy's, about half of all product sold is defined as fashion. Fashion products have no sales history, and determining which stores will sell these products best before the season begins is incredibly difficult. Rather than give stores all of the units we purchased for them upfront, Hold and Flow aims to take a portion of units intended to be sold in stores, and place them in a warehouse. As sales are observed in stores, the Hold and Flow algorithm then sends units throughout the selling season in order to maximize sales across all stores.</p>            
+            </div>
+
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="d-flex flex-row justify-content-center">
+                <!--Grid row-->
+                <div class="d-flex flex-col">
+                    <p class="font-weight-bold"> Allocating Inventory To Stores Without Hold and Flow </h4>
+                    <!-- Chart Showing Inventory Without Hold and Flow -->
+                    <canvas id="myChart"></canvas>
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="d-flex flex-col">
+                    <p class="font-weight-bold"> Allocating Inventory To Stores With Hold and Flow </h4>
+                    <!-- Chart Showing Inventory With Hold and Flow -->
+                    <canvas id="myChart2"></canvas>
+                </div>
+                <!--Grid row-->            
             </div>
             <!--Grid row-->
-      
+            <script>
+                    let myChart = document.getElementById('myChart').getContext('2d');
+                    let massPopChart = new Chart(myChart, {type: 'bar',
+                        data: {
+                            labels: ['Worcester city', 'Springfield city', 'Lowell city', 'Cambridge city'],
+                            datasets:[{
+                                label:'Population',
+                                data: [181045, 153060, 106519, 105162]
+                                }
+                            ]
+                        },
+                        options: {}
+                    });
+
+                    let myChart2 = document.getElementById('myChart2').getContext('2d');
+                    let massPopChart2 = new Chart(myChart2, {type: 'bar',
+                        data: {
+                            labels: ['Worcester city', 'Springfield city', 'Lowell city', 'Cambridge city'],
+                            datasets:[{
+                                label:'Population',
+                                data: [181045, 153060, 106519, 105162]
+                                }
+                            ]
+                        },
+                        options: {}
+                    });
+                </script>
         </div>
         <!--Grid row-->
 
