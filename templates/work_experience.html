@@ -93,9 +93,11 @@
         <!-- Slider for Start to End of Season -->
 
         <script>
-            const slider = $("#haf_season_range");
-            slider.on("input change", function(e) {
-                switch (new Date().getDay()) {
+            const slider = document.getElementById("haf_season_range");
+            console.log(slider.value);
+            slider.oninput = function() {
+                console.log(slider.value);
+                switch (slider.value) {
                     case 0:
                         console.log("Sunday");
                         break;
@@ -109,7 +111,9 @@
                         console.log("Wednesday");
                         break;
                     }
-            });
+            }
+
+            
         </script>
 
 
