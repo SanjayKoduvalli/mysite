@@ -40,30 +40,35 @@
 
             <!-- Chart javascript -->
             <script>
-                let store_labels = ['Store 1', 'Store 2', 'Store 3', 'Pool Stock']
-                let myChart = document.getElementById('myChart').getContext('2d');
-                let massPopChart = new Chart(myChart, {type: 'bar',
-                    data: {
-                        labels: store_labels,
-                        datasets:[
-                            {
-                                label:'Inventory On-Hand',
-                                data: [10, 10, 10, 0],
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 0.2)',
-                                borderWidth: 1
-                            },
-                            {
-                                label:'Sales',
-                                data: [0, 0, 0, 0],
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 0.2)',
-                                borderWidth: 1
+                    let store_labels = ['Store 1', 'Store 2', 'Store 3', 'Pool Stock']
+                    let myChart = document.getElementById('myChart').getContext('2d');
+                    var no_haf_data = {
+                            labels: store_labels,
+                            datasets:[
+                                {
+                                    label:'Inventory On-Hand',
+                                    data: [10, 10, 10, 0],
+                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderColor: 'rgba(54, 162, 235, 0.2)',
+                                    borderWidth: 1
+                                },
+                                {
+                                    label:'Sales',
+                                    data: [0, 0, 0, 0],
+                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderColor: 'rgba(75, 192, 192, 0.2)',
+                                    borderWidth: 1
+                                }
+                            ]
+                        }
+                    window.onload = function() {
+                        window.no_haf_chart = new Chart(myChart, {type: 'bar',
+                            data: no_haf_data,
+                            options: {
+                                responsive: true
                             }
-                        ]
-                    },
-                    options: {}
-                });
+                        });
+                    }
 
                 // let myChart2 = document.getElementById('myChart2').getContext('2d');
                 // let massPopChart2 = new Chart(myChart2, {type: 'bar',
@@ -93,22 +98,27 @@
         <!-- Slider for Start to End of Season -->
 
         <script>
-            const slider = document.getElementById("haf_season_range");
+            const slider = document.getElementById("haf_season_range"); 
             console.log(slider.value);
             slider.oninput = function() {
                 console.log(slider.value);
                 switch (slider.value) {
-                    case 0:
+                    case "0":
                         console.log("Sunday");
                         break;
-                    case 1:
+                    case "1":
                         console.log("Monday");
+                        no_haf_data.datasets[0].data = [8,8,8,8];
+                        window.no_haf_chart.update();
                         break;
-                    case 2:
+                    case "2":
                         console.log("Tuesday");
                         break;
-                    case 3:
+                    case "3":
                         console.log("Wednesday");
+                        break;
+                    default:
+                        console.log("Default hit");
                         break;
                     }
             }
