@@ -3,6 +3,10 @@
 <!--Main layout-->
 <main class="mt-5">
         <div class="container">
+
+        <!-- Title -->
+        <h1 class="font-weight-bold">Allocating Inventory at Macy's Using Hold and Flow</h2>
+
         <!-- Heading -->
         <h2 class="font-weight-bold">Overview</h2>
       
@@ -10,7 +14,12 @@
             <div class="d-flex flex-row">
       
                 <!-- Description -->
-                <p class="grey-text mr-2">At Macy's, about half of all product sold is defined as fashion. Fashion products have no sales history, and determining which stores will sell these products best before the season begins is incredibly difficult. Rather than give stores all of the units we purchased for them upfront, Hold and Flow aims to take a portion of units intended to be sold in stores, and place them in a warehouse. As sales are observed in stores, the Hold and Flow algorithm then sends units throughout the selling season in order to maximize sales across all stores.</p>            
+                <p class="grey-text mr-2">At Macy's, about half of all product sold is defined as fashion. 
+                    Fashion products have no sales history, and determining which stores will sell these products 
+                    best before the season begins is incredibly difficult. Rather than give stores all of the units 
+                    we purchased for them upfront, Hold and Flow aims to maximize profit by taking a portion of 
+                    units intended to be sold in stores, and place them in a warehouse. As sales are observed 
+                    in stores, the Hold and Flow algorithm sends units to the locations that have the highest probability of selling them.</p>            
             </div>
             <!--Grid row-->
 
@@ -21,10 +30,9 @@
             <h2 class="font-weight-bold">Hold and Flow Example</h2>
             
             <!--Grid row-->
-            <div class="d-flex flex-row justify-content-around">
+            <div class="d-flex flex-col align-content-stretch">
                 <!--Grid row-->
-                <div class="d-flex flex-col">
-                    <p class="font-weight-bold"> No Hold and Flow </h4>
+                <div class="d-flex flex-row">
                     <!-- Chart Showing Inventory Without Hold and Flow -->
                     <canvas id="no_haf_chart"></canvas>
                 </div>
@@ -32,8 +40,7 @@
                 
 
                 <!--Grid row-->
-                <div class="d-flex flex-col">
-                    <p class="font-weight-bold"> Hold and Flow </h4>
+                <div class="d-flex flex-row">
                     <!-- Chart Showing Inventory Without Hold and Flow -->
                     <canvas id="haf_chart"></canvas>
                 </div>
@@ -49,7 +56,17 @@
 
                     
 
-                    var store_data = {
+                    // Graph chart colors
+                    let bar_colors = {
+                        actual_sales: 'rgba(0, 0, 0, 0.2)',
+                        potential_sales: 'rgba(0, 0, 0, 0.2)',
+                        cumulative_sales: 'rgba(75, 192, 192, 0.2)',
+                        inventory: 'rgba(54, 162, 235, 0.2)',
+                        flow: 'rgba(0, 0, 0, 0.2)',
+                        cumulative_flow: 'rgba(153, 102, 255, 0.2)'
+                    }               
+                    
+                   var store_data = {
                         no_haf: {
                             // Weeks of sales
                             week_0: {
@@ -57,28 +74,32 @@
                                 potential_sales: [0,0,0,0],
                                 cumulative_sales: [0,0,0,0],
                                 inventory: [10,10,10,0],
-                                flow: [0,0,0,0]
+                                flow: [0,0,0,0],
+                                cumulative_flow: [0,0,0,0]
                             },
                             week_1: {
                                 actual_sales: [1,5,2,0],
                                 potential_sales: [1,5,2,0],
                                 cumulative_sales: [1,5,2,0],
                                 inventory: [9,5,8,0],
-                                flow: [0,0,0,0]
+                                flow: [0,0,0,0],
+                                cumulative_flow: [0,0,0,0]
                             },
                             week_2: {
                                 actual_sales: [2,2,5,0],
                                 potential_sales: [2,2,6,0],
                                 cumulative_sales: [3,7,8,0],
                                 inventory: [7,3,2,0],
-                                flow: [0,0,0,0]
+                                flow: [0,0,0,0],
+                                cumulative_flow: [0,0,0,0]
                             },
                             week_3: {
                                 actual_sales: [1,3,2,0],
                                 potential_sales: [1,5,5,0],
                                 cumulative_sales: [4,10,10,0],
                                 inventory: [6,0,0,0],
-                                flow: [0,0,0,0]
+                                flow: [0,0,0,0],
+                                cumulative_flow: [0,0,0,0]
                             }
                         },
                         haf: {
@@ -125,24 +146,24 @@
                                     label:'Inventory On-Hand',
                                     data: store_data.no_haf.week_0.inventory,
                                     // Blue
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    borderColor: 'rgba(54, 162, 235, 0.2)',
+                                    backgroundColor: bar_colors.inventory,
+                                    borderColor: bar_colors.inventory,
                                     borderWidth: 1
                                 },
                                 {
                                     label:'Cumulative Sales',
                                     data: store_data.no_haf.week_0.cumulative_sales,
                                     // Green
-                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                    borderColor: 'rgba(75, 192, 192, 0.2)',
+                                    backgroundColor: bar_colors.cumulative_sales,
+                                    borderColor: bar_colors.cumulative_sales,
                                     borderWidth: 1
                                 },
                                 {
                                     label:'Cumulative Flow',
                                     data: store_data.no_haf.week_0.cumulative_flow,
                                     // Purple
-                                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                                    borderColor: 'rgba(153, 102, 255, 0.2)',
+                                    backgroundColor: bar_colors.cumulative_flow,
+                                    borderColor: bar_colors.cumulative_flow,
                                     borderWidth: 1
                                 }
                             ]
@@ -156,24 +177,24 @@
                                     label:'Inventory On-Hand',
                                     data: store_data.haf.week_0.inventory,
                                     // Blue
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    borderColor: 'rgba(54, 162, 235, 0.2)',
+                                    backgroundColor: bar_colors.inventory,
+                                    borderColor: bar_colors.inventory,
                                     borderWidth: 1
                                 },
                                 {
                                     label:'Cumulative Sales',
                                     data: store_data.haf.week_0.cumulative_sales,
                                     // Green
-                                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                    borderColor: 'rgba(75, 192, 192, 0.2)',
+                                    backgroundColor: bar_colors.cumulative_sales,
+                                    borderColor: bar_colors.cumulative_sales,
                                     borderWidth: 1
                                 },
                                 {
                                     label:'Cumulative Flow',
                                     data: store_data.haf.week_0.cumulative_flow,
                                     // Purple
-                                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                                    borderColor: 'rgba(153, 102, 255, 0.2)',
+                                    backgroundColor: bar_colors.cumulative_flow,
+                                    borderColor: bar_colors.cumulative_flow,
                                     borderWidth: 1
                                 }
                             ]
@@ -190,13 +211,15 @@
                                         ticks: {
                                             suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
                                             suggestedMax: 15,    // maximum will be 0, unless there is a lower value.
-
-
                                         }
                                     }]
                                 },
+                                title: {
+                                    display: true,
+                                    text: 'Allocating Inventory Without Hold and Flow'
+                                },
                                 legend: {
-                                    display: true
+                                    display: false
                                 }
                             }
                         });
@@ -215,8 +238,12 @@
                                         }
                                     }]
                                 },
+                                title: {
+                                    display: true,
+                                    text: 'Allocating Inventory With Hold and Flow'
+                                },
                                 legend: {
-                                    display: true
+                                    display: false
                                 }
                             }
                         });
@@ -228,13 +255,20 @@
 
         <!-- Slider for Start to End of Season -->
         <div class="d-flex justify-content-center my-4">
-            <span class="font-weight-bold blue-text mr-2 mt-1">Start of Season</span>
+            <span class="font-weight-bold indigo-text mr-2 mt-1">Start of Season</span>
                 <form class="range-field my-5">
                     <input id="haf_season_range" class="no-border" type="range" value="0" min="0" step="1" max="3" />
                 </form>
-            <span class="font-weight-bold blue-text ml-2 mt-1">End of Season</span>
+            <span class="font-weight-bold indigo-text ml-2 mt-1">End of Season</span>
         </div>
         <!-- Slider for Start to End of Season -->
+
+        <!-- Aggregate Stats for Example -->
+        <div class="d-flex justify-content-center my-4">
+               <!-- Description -->
+               <p class="font-weight-bold indigo-text ml-2 mt-1" id="haf_agg_stats"></p>
+        </div>
+        <!-- Aggregate Stats for Example -->
 
         <!--Grid row-->
         <!-- Explanation of HAF Stage -->
@@ -245,7 +279,10 @@
         <!--Grid row-->
 
         <script>
+            const arrSum = arr => arr.reduce((a,b) => a + b, 0);
             document.getElementById("haf_overview_desc").innerHTML = "At the start of the season, each store gets fewer units, and the remaining units go into a pool stock location";
+            document.getElementById("haf_agg_stats").innerHTML = "Change in Sales Units: " + (arrSum(store_data.haf.week_0.cumulative_sales) - arrSum(store_data.no_haf.week_0.cumulative_sales))
+            + " Total Units flowed: " + arrSum(store_data.haf.week_0.cumulative_flow);
             const slider = document.getElementById("haf_season_range"); 
             console.log(slider.value);
             slider.oninput = function() {
@@ -264,6 +301,8 @@
                         window.haf_chart.update();
 
                         document.getElementById("haf_overview_desc").innerHTML = "With Hold and Flow, each store gets fewer units at the start of the season, and the remaining units go into a pool stock location.";
+                        document.getElementById("haf_agg_stats").innerHTML = "Change in Sales Units: " + (arrSum(store_data.haf.week_0.cumulative_sales) - arrSum(store_data.no_haf.week_0.cumulative_sales))
+                            + " Total Units flowed: " + arrSum(store_data.haf.week_0.cumulative_flow);
                         break;
                     case "1":
                         console.log("Monday");
@@ -278,6 +317,8 @@
                         window.haf_chart.update();
 
                         document.getElementById("haf_overview_desc").innerHTML = "As we observe sales in each store throughout the season, we can better determine which locations sell the product well, and which locations are selling poorly. In this case store 1 is selling poorly, but stores 2 and 3 are selling better than expectations.";
+                        document.getElementById("haf_agg_stats").innerHTML = "Change in Sales Units: " + (arrSum(store_data.haf.week_1.cumulative_sales) - arrSum(store_data.no_haf.week_1.cumulative_sales))
+                            + " Total Units flowed: " + arrSum(store_data.haf.week_1.cumulative_flow);
                         break;
                     case "2":
                         console.log("Tuesday");
@@ -292,6 +333,8 @@
                         window.haf_chart.update();
 
                         document.getElementById("haf_overview_desc").innerHTML = "As stores that are selling product well get low on inventory, units flow from the pool stock location in order to prevent missed sales";
+                        document.getElementById("haf_agg_stats").innerHTML = "Change in Sales Units: " + (arrSum(store_data.haf.week_2.cumulative_sales) - arrSum(store_data.no_haf.week_2.cumulative_sales))
+                            + " Total Units flowed: " + arrSum(store_data.haf.week_2.cumulative_flow);
                         break;
                     case "3":
                         console.log("Wednesday");
@@ -305,6 +348,8 @@
                         haf_data.datasets[2].data = store_data.haf.week_3.cumulative_flow;
 
                         document.getElementById("haf_overview_desc").innerHTML = "Towards the end of the season, all remaining units are sent out to the stores. We predict which sales have the best chance of selling each unit, and flow units out to the stores that have the best probability of selling them.";
+                        document.getElementById("haf_agg_stats").innerHTML = "Change in Sales Units: " + (arrSum(store_data.haf.week_3.cumulative_sales) - arrSum(store_data.no_haf.week_3.cumulative_sales))
+                            + " Total Units flowed: " + arrSum(store_data.haf.week_3.cumulative_flow);
                         window.haf_chart.update();
                         break;
                     default:
@@ -323,47 +368,22 @@
         <!-- Proof of Concept Header -->
         <h2 class="font-weight-bold">Proof of Concept</h2>
 
+        <h5 class="font-weight-bold grey-text">Skills demonstrated: Python</h5>
+
         <!--Grid row-->
         <div class="row d-flex justify-content-left mb-4">
-      
-                <!--Grid column-->
+
+            <!--Grid column-->
                 <div class="d-flex flex-column">
           
                     <!-- Description -->
-                    <p class="grey-text mr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur</p>
+                    <p class="grey-text mr-2">When I began working at Macy's, my first task was to help prove that the idea for Hold and Flow could work. 
+                        Using a python package called <a href="https://simpy.readthedocs.io/en/latest/">Simpy</a>, I built a simulator to test the Hold and Flow algorithm by building a set of virtual stores and a warehouse. 
+                        Using the simulator, we could vary the demand to stores, the percent of store receipts that are diverted to the warehouse, and the strategy employed to send units to stores.
+                        We were able to use the simulator to prove the value of Hold and Flow, and also select the strategy we would want to implement for the pilot.
+                    </p>
                 </div>
                 <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="d-flex flex-column">
-                        <p>&#9679; We listen to the other person without interruption and practice effective listening skills.</p>
-                        <p>&#9679; We do not shy away from challenges</p>
-                        <p>&#9679; We stay true to our slogan</p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="d-flex flex-column">
-          
-                        <!-- Description -->
-                        <p class="grey-text mr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur</p>
-                    </div>
 
             </div>
             <!--Grid row-->
@@ -372,7 +392,8 @@
         <hr class="hr-strong">
 
         <!-- Proof of Concept Header -->
-        <h2 class="font-weight-bold">Demand Forecasting</h2>
+        <h2 class="font-weight-bold">Piloting Hold and Flow</h2>
+        <h5 class="font-weight-bold grey-text">Skills demonstrated: Python, SQL</h5>
 
         <!--Grid row-->
         <div class="row d-flex justify-content-left mb-4">
@@ -381,46 +402,56 @@
                 <div class="d-flex flex-column">
           
                     <!-- Description -->
-                    <p class="grey-text mr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                        facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                        sit pariatur</p>
+                    <p class="grey-text mr-2">After showing the promise of Hold and Flow through simulation, the next
+                        step is to build the Hold and Flow algorithm and implement it for a few products to check that it works.
+                        I was tasked with building the end to end algorithm, and generating a list of transfers to stores every week.
+
+                        The pilot was a success, and we were able to present a 10% sales lift in stores. The results of the pilot was presented 
+                        in the press. You can read about it <a href="hold and let flow tank lululemon">here</a>.
+                    </p>
                 </div>
                 <!--Grid column-->
 
-                <!--Grid column-->
-                <div class="d-flex flex-column">
-                        <p>&#9679; We listen to the other person without interruption and practice effective listening skills.</p>
-                        <p>&#9679; We do not shy away from challenges</p>
-                        <p>&#9679; We stay true to our slogan</p>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="d-flex flex-column">
-          
-                        <!-- Description -->
-                        <p class="grey-text mr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi voluptate hic provident nulla repellat
-                            facere esse molestiae ipsa labore porro minima quam quaerat rem, natus repudiandae debitis est
-                            sit pariatur</p>
-                    </div>
-
-            </div>
-            <!--Grid row-->
+        </div>
+        <!--Grid row-->
 
         <!-- Divider -->
         <hr class="hr-strong">
+
+        <!-- Proof of Concept Header -->
+        <h2 class="font-weight-bold">Building the Full Scale Hold and Flow algorithm</h2>
+        <h5 class="font-weight-bold grey-text">Skills demonstrated: Python, SQL, Tableau, Excel Macros</h5>
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-left mb-4">
+      
+                <!--Grid column-->
+                <div class="d-flex flex-column">
+          
+                    <!-- Description -->
+                    <p class="grey-text mr-2">With the pilot deemed a success, our team now had a new job: building the full scale algorithm.
+                        For this task, I was charged with building the SQL pipeline that fed data into the algorithm. This included determining
+                        which products were eligible for Hold and Flow, creating an average rate of sale (ARS) prediction for each product, and
+                        connecting each product to a seasonality curve to improve forecast accuracy. I also created SQL tables that would allow for
+                        manual input from stakeholders in order to change the behavior of the algorithm.
+                    </p>
+                    <!-- HAF form processing -->
+                    <p class="grey-text mr-2">In addition to building the Hold and Flow pipeline, I was also asked to build a form processor that would allow 
+                        merchants at Macy's to provide the algorithm with information about the products it transfers. This included information about eligbility, seasonality,
+                        and the number of units that could be transferred to stores. The forms I built were Excel sheets with a macro that would save data in a folder that the Python processor would read,
+                        validate that the forms were set up correctly, and upload to a SQL table for the algorithm to use.
+                    </p>
+                    <!-- HAF form processing -->
+                    <p class="grey-text mr-2">To help merchants track the progress of Hold and Flow products, I set up Tableau reporting that provided a snapshot of how 
+                        receipts, transfers, and sales had been going for each product. I also set up an Exceptions reporting tool, which would flag products that could
+                        have issues and needed to be reviewed. This allowed stakeholder to anticipate problems and take preventative measures.
+                    </p>
+
+                </div>
+                <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
 
       
         </div> 
