@@ -10,265 +10,265 @@
         <!-- Heading -->
         <h2 class="font-weight-bold">Overview</h2>
       
+        <!--Grid row-->
+        <div class="d-flex flex-row">
+    
+            <!-- Description -->
+            <p class="grey-text mr-2">At Macy's, about half of all product sold is defined as fashion. 
+                Fashion products have no sales history, and determining which stores will sell these products 
+                best before the season begins is incredibly difficult. Rather than give stores all of the units 
+                we purchased for them upfront, Hold and Flow aims to maximize profit by taking a portion of 
+                units intended to be sold in stores, and place them in a warehouse. As sales are observed 
+                in stores, the Hold and Flow algorithm sends units to the locations that have the highest probability of selling them.</p>            
+        </div>
+        <!--Grid row-->
+
+        <!-- Divider -->
+        <hr class="hr-strong">
+
+        <!-- Proof of Concept Header -->
+        <h2 class="font-weight-bold">Hold and Flow Example</h2>
+        
+        <!--Grid row-->
+        <div class="row">
             <!--Grid row-->
-            <div class="d-flex flex-row">
-      
-                <!-- Description -->
-                <p class="grey-text mr-2">At Macy's, about half of all product sold is defined as fashion. 
-                    Fashion products have no sales history, and determining which stores will sell these products 
-                    best before the season begins is incredibly difficult. Rather than give stores all of the units 
-                    we purchased for them upfront, Hold and Flow aims to maximize profit by taking a portion of 
-                    units intended to be sold in stores, and place them in a warehouse. As sales are observed 
-                    in stores, the Hold and Flow algorithm sends units to the locations that have the highest probability of selling them.</p>            
+            <div class="d-flex flex-col flex-1">
+                <!-- Chart Showing Inventory Without Hold and Flow -->
+                <canvas id="no_haf_chart"></canvas>
             </div>
             <!--Grid row-->
-
-            <!-- Divider -->
-            <hr class="hr-strong">
-
-            <!-- Proof of Concept Header -->
-            <h2 class="font-weight-bold">Hold and Flow Example</h2>
             
+
             <!--Grid row-->
-            <div class="row">
-                <!--Grid row-->
-                <div class="d-flex flex-col flex-1">
-                    <!-- Chart Showing Inventory Without Hold and Flow -->
-                    <canvas id="no_haf_chart"></canvas>
+            <div class="d-flex flex-col flex-1">
+                <!-- Chart Showing Inventory Without Hold and Flow -->
+                <canvas id="haf_chart"></canvas>
+            </div>
+            <!--Grid row-->      
+        </div>
+        <!--Grid row-->
+
+        <!-- legend for the charts -->
+        <!-- Should replace this text and css with javascript that assigns automatically -->
+        <div class= "d-flex flex-row">
+                <div id= "inventory_legend" class="col flex-1 text-center font-weight-bold" style= "background-color: rgba(54, 162, 235, 0.2)"> 
+                    Inventory On-Hand 
                 </div>
-                <!--Grid row-->
+                <div id="sales_legend" class="col flex-1 text-center font-weight-bold" style= "background-color: rgba(75, 192, 192, 0.2)"> 
+                    Cumulative Sales 
+                </div>
+                <div id="flow_legend" class="col flex-1 text-center font-weight-bold" style= "background-color: rgba(153, 102, 255, 0.2)">
+                    Cumulative Flow 
+                </div>
+
+        </div>
+        <!-- legend for the charts -->
+
+        <!-- Chart javascript -->
+        <script>
+                let store_labels = ['Store 1', 'Store 2', 'Store 3', 'Pool Stock']
+                let myChart = document.getElementById('no_haf_chart').getContext('2d');
+                let myChart2 = document.getElementById('haf_chart').getContext('2d');
+
                 
 
-                <!--Grid row-->
-                <div class="d-flex flex-col flex-1">
-                    <!-- Chart Showing Inventory Without Hold and Flow -->
-                    <canvas id="haf_chart"></canvas>
-                </div>
-                <!--Grid row-->      
-            </div>
-            <!--Grid row-->
-
-            <!-- legend for the charts -->
-            <!-- Should replace this text and css with javascript that assigns automatically -->
-            <di class= "d-flex flex-row">
-                    <div id= "inventory_legend" class="col flex-1 text-center font-weight-bold" style= "background-color: rgba(54, 162, 235, 0.2)"> 
-                        Inventory On-Hand 
-                    </div>
-                    <div id="sales_legend" class="col flex-1 text-center font-weight-bold" style= "background-color: rgba(75, 192, 192, 0.2)"> 
-                        Cumulative Sales 
-                    </div>
-                    <div id="flow_legend" class="col flex-1 text-center font-weight-bold" style= "background-color: rgba(153, 102, 255, 0.2)">
-                         Cumulative Flow 
-                    </div>
-
-            </div>
-            <!-- legend for the charts -->
-
-            <!-- Chart javascript -->
-            <script>
-                    let store_labels = ['Store 1', 'Store 2', 'Store 3', 'Pool Stock']
-                    let myChart = document.getElementById('no_haf_chart').getContext('2d');
-                    let myChart2 = document.getElementById('haf_chart').getContext('2d');
-
-                    
-
-                    // Graph chart colors
-                    let bar_colors = {
-                        actual_sales: 'rgba(0, 0, 0, 0.2)',
-                        potential_sales: 'rgba(0, 0, 0, 0.2)',
-                        cumulative_sales: 'rgba(75, 192, 192, 0.2)',
-                        inventory: 'rgba(54, 162, 235, 0.2)',
-                        flow: 'rgba(0, 0, 0, 0.2)',
-                        cumulative_flow: 'rgba(153, 102, 255, 0.2)'
-                    }               
-                    
-                   var store_data = {
-                        no_haf: {
-                            // Weeks of sales
-                            week_0: {
-                                actual_sales: [0,0,0,0],
-                                potential_sales: [0,0,0,0],
-                                cumulative_sales: [0,0,0,0],
-                                inventory: [10,10,10,0],
-                                flow: [0,0,0,0],
-                                cumulative_flow: [0,0,0,0]
-                            },
-                            week_1: {
-                                actual_sales: [1,5,2,0],
-                                potential_sales: [1,5,2,0],
-                                cumulative_sales: [1,5,2,0],
-                                inventory: [9,5,8,0],
-                                flow: [0,0,0,0],
-                                cumulative_flow: [0,0,0,0]
-                            },
-                            week_2: {
-                                actual_sales: [2,2,5,0],
-                                potential_sales: [2,2,6,0],
-                                cumulative_sales: [3,7,8,0],
-                                inventory: [7,3,2,0],
-                                flow: [0,0,0,0],
-                                cumulative_flow: [0,0,0,0]
-                            },
-                            week_3: {
-                                actual_sales: [1,3,2,0],
-                                potential_sales: [1,5,5,0],
-                                cumulative_sales: [4,10,10,0],
-                                inventory: [6,0,0,0],
-                                flow: [0,0,0,0],
-                                cumulative_flow: [0,0,0,0]
-                            }
+                // Graph chart colors
+                let bar_colors = {
+                    actual_sales: 'rgba(0, 0, 0, 0.2)',
+                    potential_sales: 'rgba(0, 0, 0, 0.2)',
+                    cumulative_sales: 'rgba(75, 192, 192, 0.2)',
+                    inventory: 'rgba(54, 162, 235, 0.2)',
+                    flow: 'rgba(0, 0, 0, 0.2)',
+                    cumulative_flow: 'rgba(153, 102, 255, 0.2)'
+                }               
+                
+                var store_data = {
+                    no_haf: {
+                        // Weeks of sales
+                        week_0: {
+                            actual_sales: [0,0,0,0],
+                            potential_sales: [0,0,0,0],
+                            cumulative_sales: [0,0,0,0],
+                            inventory: [10,10,10,0],
+                            flow: [0,0,0,0],
+                            cumulative_flow: [0,0,0,0]
                         },
-                        haf: {
-                            // Weeks of sales
-                            week_0: {
-                                actual_sales: [0,0,0,0],
-                                potential_sales: [0,0,0,0],
-                                cumulative_sales: [0,0,0,0],
-                                inventory: [7,7,7,9],
-                                flow: [0,0,0,0],
-                                cumulative_flow: [0,0,0,0]
-                            },
-                            week_1: {
-                                actual_sales: [1,5,2,0],
-                                potential_sales: [1,5,2,0],
-                                cumulative_sales: [1,5,2,0],
-                                inventory: [6,2,5,9],
-                                flow: [0,0,0,0],
-                                cumulative_flow: [0,0,0,0]
-                            },
-                            week_2: {
-                                actual_sales: [2,2,6,0],
-                                potential_sales: [2,2,6,0],
-                                cumulative_sales: [3,7,8,0],
-                                inventory: [4,1,1,6],
-                                flow: [0,1,2,3],
-                                cumulative_flow: [0,1,2,3]
-                            },
-                            week_3: {
-                                actual_sales: [1,5,3,0],
-                                potential_sales: [1,5,5,0],
-                                cumulative_sales: [4,12,11,0],
-                                inventory: [3,0,0,0],
-                                flow: [0,4,2,6],
-                                cumulative_flow: [0,5,4,9]
-                            }
+                        week_1: {
+                            actual_sales: [1,5,2,0],
+                            potential_sales: [1,5,2,0],
+                            cumulative_sales: [1,5,2,0],
+                            inventory: [9,5,8,0],
+                            flow: [0,0,0,0],
+                            cumulative_flow: [0,0,0,0]
+                        },
+                        week_2: {
+                            actual_sales: [2,2,5,0],
+                            potential_sales: [2,2,6,0],
+                            cumulative_sales: [3,7,8,0],
+                            inventory: [7,3,2,0],
+                            flow: [0,0,0,0],
+                            cumulative_flow: [0,0,0,0]
+                        },
+                        week_3: {
+                            actual_sales: [1,3,2,0],
+                            potential_sales: [1,5,5,0],
+                            cumulative_sales: [4,10,10,0],
+                            inventory: [6,0,0,0],
+                            flow: [0,0,0,0],
+                            cumulative_flow: [0,0,0,0]
                         }
+                    },
+                    haf: {
+                        // Weeks of sales
+                        week_0: {
+                            actual_sales: [0,0,0,0],
+                            potential_sales: [0,0,0,0],
+                            cumulative_sales: [0,0,0,0],
+                            inventory: [7,7,7,9],
+                            flow: [0,0,0,0],
+                            cumulative_flow: [0,0,0,0]
+                        },
+                        week_1: {
+                            actual_sales: [1,5,2,0],
+                            potential_sales: [1,5,2,0],
+                            cumulative_sales: [1,5,2,0],
+                            inventory: [6,2,5,9],
+                            flow: [0,0,0,0],
+                            cumulative_flow: [0,0,0,0]
+                        },
+                        week_2: {
+                            actual_sales: [2,2,6,0],
+                            potential_sales: [2,2,6,0],
+                            cumulative_sales: [3,7,8,0],
+                            inventory: [4,1,1,6],
+                            flow: [0,1,2,3],
+                            cumulative_flow: [0,1,2,3]
+                        },
+                        week_3: {
+                            actual_sales: [1,5,3,0],
+                            potential_sales: [1,5,5,0],
+                            cumulative_sales: [4,12,11,0],
+                            inventory: [3,0,0,0],
+                            flow: [0,4,2,6],
+                            cumulative_flow: [0,5,4,9]
+                        }
+                    }
+                };
+
+                var no_haf_data = {
+                        labels: store_labels,
+                        datasets:[
+                            {
+                                label:'Inventory On-Hand',
+                                data: store_data.no_haf.week_0.inventory,
+                                // Blue
+                                backgroundColor: bar_colors.inventory,
+                                borderColor: bar_colors.inventory,
+                                borderWidth: 1
+                            },
+                            {
+                                label:'Cumulative Sales',
+                                data: store_data.no_haf.week_0.cumulative_sales,
+                                // Green
+                                backgroundColor: bar_colors.cumulative_sales,
+                                borderColor: bar_colors.cumulative_sales,
+                                borderWidth: 1
+                            },
+                            {
+                                label:'Cumulative Flow',
+                                data: store_data.no_haf.week_0.cumulative_flow,
+                                // Purple
+                                backgroundColor: bar_colors.cumulative_flow,
+                                borderColor: bar_colors.cumulative_flow,
+                                borderWidth: 1
+                            }
+                        ]
+                    };
+                
+
+                    var haf_data = {
+                        labels: store_labels,
+                        datasets:[
+                            {
+                                label:'Inventory On-Hand',
+                                data: store_data.haf.week_0.inventory,
+                                // Blue
+                                backgroundColor: bar_colors.inventory,
+                                borderColor: bar_colors.inventory,
+                                borderWidth: 1
+                            },
+                            {
+                                label:'Cumulative Sales',
+                                data: store_data.haf.week_0.cumulative_sales,
+                                // Green
+                                backgroundColor: bar_colors.cumulative_sales,
+                                borderColor: bar_colors.cumulative_sales,
+                                borderWidth: 1
+                            },
+                            {
+                                label:'Cumulative Flow',
+                                data: store_data.haf.week_0.cumulative_flow,
+                                // Purple
+                                backgroundColor: bar_colors.cumulative_flow,
+                                borderColor: bar_colors.cumulative_flow,
+                                borderWidth: 1
+                            }
+                        ]
                     };
 
-                    var no_haf_data = {
-                            labels: store_labels,
-                            datasets:[
-                                {
-                                    label:'Inventory On-Hand',
-                                    data: store_data.no_haf.week_0.inventory,
-                                    // Blue
-                                    backgroundColor: bar_colors.inventory,
-                                    borderColor: bar_colors.inventory,
-                                    borderWidth: 1
-                                },
-                                {
-                                    label:'Cumulative Sales',
-                                    data: store_data.no_haf.week_0.cumulative_sales,
-                                    // Green
-                                    backgroundColor: bar_colors.cumulative_sales,
-                                    borderColor: bar_colors.cumulative_sales,
-                                    borderWidth: 1
-                                },
-                                {
-                                    label:'Cumulative Flow',
-                                    data: store_data.no_haf.week_0.cumulative_flow,
-                                    // Purple
-                                    backgroundColor: bar_colors.cumulative_flow,
-                                    borderColor: bar_colors.cumulative_flow,
-                                    borderWidth: 1
-                                }
-                            ]
-                        };
-                    
-
-                        var haf_data = {
-                            labels: store_labels,
-                            datasets:[
-                                {
-                                    label:'Inventory On-Hand',
-                                    data: store_data.haf.week_0.inventory,
-                                    // Blue
-                                    backgroundColor: bar_colors.inventory,
-                                    borderColor: bar_colors.inventory,
-                                    borderWidth: 1
-                                },
-                                {
-                                    label:'Cumulative Sales',
-                                    data: store_data.haf.week_0.cumulative_sales,
-                                    // Green
-                                    backgroundColor: bar_colors.cumulative_sales,
-                                    borderColor: bar_colors.cumulative_sales,
-                                    borderWidth: 1
-                                },
-                                {
-                                    label:'Cumulative Flow',
-                                    data: store_data.haf.week_0.cumulative_flow,
-                                    // Purple
-                                    backgroundColor: bar_colors.cumulative_flow,
-                                    borderColor: bar_colors.cumulative_flow,
-                                    borderWidth: 1
-                                }
-                            ]
-                        };
-
-                    window.onload = function() {
-                        window.no_haf_chart = new Chart(myChart, {type: 'bar',
-                            data: no_haf_data,
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    yAxes: [{
-                                        display: true,
-                                        ticks: {
-                                            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                                            suggestedMax: 15,    // maximum will be 0, unless there is a lower value.
-                                        }
-                                    }]
-                                },
-                                title: {
+                window.onload = function() {
+                    window.no_haf_chart = new Chart(myChart, {type: 'bar',
+                        data: no_haf_data,
+                        options: {
+                            responsive: true,
+                            scales: {
+                                yAxes: [{
                                     display: true,
-                                    text: 'Allocating Inventory Without Hold and Flow',
-                                    fontSize: 20
-                                },
-                                legend: {
-                                    display: false
-                                }
+                                    ticks: {
+                                        suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                                        suggestedMax: 15,    // maximum will be 0, unless there is a lower value.
+                                    }
+                                }]
+                            },
+                            title: {
+                                display: true,
+                                text: 'Allocating Inventory Without Hold and Flow',
+                                fontSize: 20
+                            },
+                            legend: {
+                                display: false
                             }
-                        });
-                        window.haf_chart = new Chart(myChart2, {type: 'bar',
-                            data: haf_data,
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    yAxes: [{
-                                        display: true,
-                                        ticks: {
-                                            suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
-                                            suggestedMax: 15,    // maximum will be 0, unless there is a lower value.
-
-
-                                        }
-                                    }]
-                                },
-                                title: {
+                        }
+                    });
+                    window.haf_chart = new Chart(myChart2, {type: 'bar',
+                        data: haf_data,
+                        options: {
+                            responsive: true,
+                            scales: {
+                                yAxes: [{
                                     display: true,
-                                    text: 'Allocating Inventory With Hold and Flow',
-                                    fontSize: 20
-                                },
-                                legend: {
-                                    display: false
-                                }
+                                    ticks: {
+                                        suggestedMin: 0,    // minimum will be 0, unless there is a lower value.
+                                        suggestedMax: 15,    // maximum will be 0, unless there is a lower value.
+
+
+                                    }
+                                }]
+                            },
+                            title: {
+                                display: true,
+                                text: 'Allocating Inventory With Hold and Flow',
+                                fontSize: 20
+                            },
+                            legend: {
+                                display: false
                             }
-                        });
-                    }
-                    
-            </script>
-            <!-- Chart javascript -->
+                        }
+                    });
+                }
+                
+        </script>
+        <!-- Chart javascript -->
 
 
         <!-- Slider for Start to End of Season -->
@@ -391,10 +391,10 @@
         <h5 class="font-weight-bold grey-text">Skills demonstrated: Python</h5>
 
         <!--Grid row-->
-        <div class="row d-flex justify-content-left mb-4">
+        <div class="row d-flex justify-content-center mb-4">
 
             <!--Grid column-->
-                <div class="d-flex flex-column">
+            <div class="d-flex flex-column">
           
                     <!-- Description -->
                     <p class="grey-text mr-2">When I began working at Macy's, my first task was to help prove that the idea for Hold and Flow could work. 
@@ -402,11 +402,11 @@
                         Using the simulator, we could vary the demand to stores, the percent of store receipts that are diverted to the warehouse, and the strategy employed to send units to stores.
                         We were able to use the simulator to prove the value of Hold and Flow, and also select the strategy we would want to implement for the pilot.
                     </p>
-                </div>
-                <!--Grid column-->
-
             </div>
-            <!--Grid row-->
+            <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
 
         <!-- Divider -->
         <hr class="hr-strong">
