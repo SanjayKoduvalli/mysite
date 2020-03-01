@@ -50,3 +50,18 @@ a.projects {
   max-width: 30%;
   height: auto;
 }
+
+
+html,
+body,
+#work_exp {
+    height: 100%;
+}
+
+#work_exp {
+    background: url("/static/images/kerala_tea_estates.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
