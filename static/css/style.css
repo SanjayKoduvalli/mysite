@@ -24,6 +24,18 @@ body,
   background-size: cover;
 }
 
+#hobbies {
+  height: 100%;
+}
+
+#hobbies {
+  background: url("/static/images/hobbies_background.jpg")no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 #projects {
   background: url("/static/images/marble.jpg")no-repeat center center fixed;
   -webkit-background-size: cover;

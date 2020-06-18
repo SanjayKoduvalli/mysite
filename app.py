@@ -7,7 +7,8 @@ app = Flask(__name__) # '__main__'
 navbar_lines = [
     {"title": "Home", "id": "Home", "link": "home"},
     {"title": "Work Experience", "id": "Work Experience", "link": "work_experience"}, 
-    {"title": "Coding Projects", "id": "Coding Projects", "link": "project_home"},
+    {"title": "Just for Fun", "id": "Just for Fun", "link": "hobbies"}, 
+    # {"title": "Coding Projects", "id": "Coding Projects", "link": "project_home"},
     {"title": "Contact", "id": "Contact", "link": "connect"}
     ]
 curr_page = "Home"
@@ -70,6 +71,11 @@ def work_experience():
 def project_page(project):
     curr_page = "Projects"
     return render_template(f'/projects/{project}.html', curr_page=curr_page, navbar_lines = navbar_lines)
+
+@app.route('/hobbies.html')
+def hobbies():
+    curr_page = "Just for Fun"
+    return render_template(f'/hobbies.html', df=exper, curr_page=curr_page, navbar_lines = navbar_lines)
 
 
 if __name__ == '__main__':
