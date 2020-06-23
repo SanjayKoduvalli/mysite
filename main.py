@@ -60,22 +60,22 @@ def connect():
 @app.route('/projects.html')
 def project_home():
     curr_page = "Coding Projects"
-    return render_template(f'/project_home.html', projects=projects, curr_page=curr_page, navbar_lines = navbar_lines)
+    return render_template('/project_home.html', projects=projects, curr_page=curr_page, navbar_lines = navbar_lines)
 
 @app.route('/work_experience.html')
 def work_experience():
     curr_page = "Work Experience"
-    return render_template(f'/work_experience.html', df=exper, curr_page=curr_page, navbar_lines = navbar_lines)
+    return render_template('/work_experience.html', df=exper, curr_page=curr_page, navbar_lines = navbar_lines)
 
 @app.route('/projects/<project>')
 def project_page(project):
     curr_page = "Projects"
-    return render_template(f'/projects/{project}.html', curr_page=curr_page, navbar_lines = navbar_lines)
+    return render_template('/projects/{}.html'.format(project), curr_page=curr_page, navbar_lines = navbar_lines)
 
 @app.route('/hobbies.html')
 def hobbies():
     curr_page = "Just for Fun"
-    return render_template(f'/hobbies.html', df=exper, curr_page=curr_page, navbar_lines = navbar_lines)
+    return render_template('/hobbies.html', df=exper, curr_page=curr_page, navbar_lines = navbar_lines)
 
 
 if __name__ == '__main__':
