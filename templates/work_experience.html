@@ -18,7 +18,7 @@
         <div class="d-flex flex-row">
     
             <!-- Description -->
-            <p class="grey-text mr-2">At Macy's, about half of all product sold is defined as fashion. 
+            <p class="grey-text mr-2 px-1">At Macy's, about half of all product sold is defined as fashion. 
                 Fashion products have no sales history, and determining which stores will sell these products 
                 best before the season begins is incredibly difficult. Rather than give stores all of the units 
                 we purchased for them upfront, Hold and Flow aims to maximize profit by taking a portion of 
@@ -36,7 +36,7 @@
         <!--Grid row-->
         <div class="row">
             <!--Grid row-->
-            <div class="d-flex flex-col flex-1">
+            <div class="d-flex flex-col flex-1 px-1">
                 <!-- Chart Showing Inventory Without Hold and Flow -->
                 <canvas id="no_haf_chart"></canvas>
             </div>
@@ -44,7 +44,7 @@
             
 
             <!--Grid row-->
-            <div class="d-flex flex-col flex-1">
+            <div class="d-flex flex-col flex-1 px-1">
                 <!-- Chart Showing Inventory Without Hold and Flow -->
                 <canvas id="haf_chart"></canvas>
             </div>
@@ -78,12 +78,12 @@
 
                 // Graph chart colors
                 let bar_colors = {
-                    actual_sales: 'rgba(0, 0, 0, 0.2)',
-                    potential_sales: 'rgba(0, 0, 0, 0.2)',
-                    cumulative_sales: 'rgba(75, 192, 192, 0.2)',
-                    inventory: 'rgba(54, 162, 235, 0.2)',
-                    flow: 'rgba(0, 0, 0, 0.2)',
-                    cumulative_flow: 'rgba(153, 102, 255, 0.2)'
+                    actual_sales: 'rgba(0, 0, 0, 0.5)',
+                    potential_sales: 'rgba(0, 0, 0, 0.5)',
+                    cumulative_sales: 'rgba(75, 192, 192, 0.5)',
+                    inventory: 'rgba(54, 162, 235, 0.5)',
+                    flow: 'rgba(0, 0, 0, 0.5)',
+                    cumulative_flow: 'rgba(153, 102, 255, 0.5)'
                 }               
                 
                 var store_data = {
@@ -290,7 +290,7 @@
         <!-- Aggregate Stats for Example -->
         <div class="d-flex justify-content-center my-4">
                <!-- Description -->
-               <p class="font-weight-bold indigo-text ml-2 mt-1" id="haf_agg_stats"></p>
+               <p class="font-weight-bold indigo-text ml-2 mt-1 px-1" id="haf_agg_stats"></p>
         </div>
         <!-- Aggregate Stats for Example -->
 
@@ -371,7 +371,7 @@
                         haf_data.datasets[1].data = store_data.haf.week_3.cumulative_sales;
                         haf_data.datasets[2].data = store_data.haf.week_3.cumulative_flow;
 
-                        document.getElementById("haf_overview_desc").innerHTML = "Towards the end of the season, all remaining units are sent out to the stores. We predict which sales have the best chance of selling each unit, and flow units out to the stores that have the best probability of selling them.";
+                        document.getElementById("haf_overview_desc").innerHTML = "Towards the end of the season, all remaining units are sent out to the stores. We predict which locations have the best chance of selling each unit, and flow units out accordingly.";
                         document.getElementById("haf_agg_stats").innerHTML = "Change in Sales Units: " + (arrSum(store_data.haf.week_3.cumulative_sales) - arrSum(store_data.no_haf.week_3.cumulative_sales))
                             + " Total Units flowed: " + arrSum(store_data.haf.week_3.cumulative_flow);
                         window.haf_chart.update();
@@ -398,10 +398,10 @@
         <div class="row d-flex justify-content-center mb-4">
 
             <!--Grid column-->
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column px-1">
           
                     <!-- Description -->
-                    <p class="grey-text mr-2">When I began working at Macy's, my first task was to help prove that the idea for Hold and Flow could work. 
+                    <p class="grey-text mr-2 px-1">When I began working at Macy's, my first task was to help prove that the idea for Hold and Flow could work. 
                         Using a python package called <a href="https://simpy.readthedocs.io/en/latest/">Simpy</a>, I built a simulator to test the Hold and Flow algorithm by building a set of virtual stores and a warehouse. 
                         Using the simulator, we could vary the demand to stores, the percent of store receipts that are diverted to the warehouse, and the strategy employed to send units to stores.
                         We were able to use the simulator to prove the value of Hold and Flow, and also select the strategy we would want to implement for the pilot.
@@ -423,10 +423,10 @@
         <div class="row d-flex justify-content-center mb-4">
       
                 <!--Grid column-->
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column px-1">
           
                     <!-- Description -->
-                    <p class="grey-text mr-2">After showing the promise of Hold and Flow through simulation, the next
+                    <p class="grey-text mr-2 px-1">After showing the promise of Hold and Flow through simulation, the next
                         step is to build the Hold and Flow algorithm and implement it for a few products to check that it works.
                         I was tasked with building the end to end algorithm, and generating a list of transfers to stores every week.
 
@@ -447,26 +447,26 @@
         <h5 class="font-weight-bold grey-text">Skills demonstrated: Python, SQL, Tableau, Excel Macros</h5>
 
         <!--Grid row-->
-        <div class="row d-flex justify-content-center mb-4">
+        <div class="row d-flex justify-content-center mb-4 px-1">
       
                 <!--Grid column-->
                 <div class="d-flex flex-column">
           
                     <!-- Description -->
-                    <p class="grey-text mr-2">With the pilot deemed a success, our team now had a new job: building the full scale algorithm.
+                    <p class="grey-text mr-2 px-1">With the pilot deemed a success, our team now had a new job: building the full scale algorithm.
                         For this task, I was charged with building the SQL pipeline that fed data into the algorithm. This included determining
                         which products were eligible for Hold and Flow, creating an average rate of sale (ARS) prediction for each product, and
                         connecting each product to a seasonality curve to improve forecast accuracy. I also created SQL tables that would allow for
                         manual input from stakeholders in order to change the behavior of the algorithm.
                     </p>
                     <!-- HAF form processing -->
-                    <p class="grey-text mr-2">In addition to building the Hold and Flow pipeline, I was also asked to build a form processor that would allow 
+                    <p class="grey-text mr-2 px-1">In addition to building the Hold and Flow pipeline, I was also asked to build a form processor that would allow 
                         merchants at Macy's to provide the algorithm with information about the products it transfers. This included information about eligbility, seasonality,
                         and the number of units that could be transferred to stores. The forms I built were Excel sheets with a macro that would save data in a folder that the Python processor would read,
                         validate that the forms were set up correctly, and upload to a SQL table for the algorithm to use.
                     </p>
                     <!-- HAF form processing -->
-                    <p class="grey-text mr-2">To help merchants track the progress of Hold and Flow products, I set up Tableau reporting that provided a snapshot of how 
+                    <p class="grey-text mr-2 px-1">To help merchants track the progress of Hold and Flow products, I set up Tableau reporting that provided a snapshot of how 
                         receipts, transfers, and sales had been going for each product. I also set up an Exceptions reporting tool, which would flag products automatically if they had weird or problematic flow patterns. 
                         This allowed stakeholders to anticipate problems and take preventative measures.
                     </p>
